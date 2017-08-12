@@ -15,46 +15,24 @@ def test_range2d(size):
             gen_val = next(generator)
             assert gen_val == (x, y)
 
-@pytest.mark.parametrize('point',
-                         [xfail((-1, 0)), 
-                         xfail((0, -1)),
-                         xfail((10, 0)),
-                         xfail((0, 10)),
-                         (9, 9),
-                         (0, 0)])
-def test_irange(point):
-    ran = (10, 10)
-    assert run.inrange(point, ran)
-
 def test_neighbors():
     pos = (10.0, 10.0)
     for x, y in run.neighbors(pos):
-        assert type(x) == int
-        assert type(y) == int
+        assert type(x) == np.int32
+        assert type(y) == np.int32
         dist_sqr = ((pos[0] - x) ** 2 + (pos[1] - y) ** 2)
         assert (dist_sqr > 0.) and (dist_sqr < 2.1)
 
 boards = []
-size = (10, 10)
-eboard = np.zeros(size)
-eboard[-1, -1] = 1
-eboard[0, -1] = 1
-eboard[-1, 0] = 1
-eboard[0, 0] = 1
-boards.append((np.ones(size), eboard))
+board = set([(10, 10), (11, 10), (10, 11), (11, 11)])
+eboard = board
+boards.append((board, eboard))
 
-board = np.zeros(size)
-board[5, 5] = 1
-board[5, 6] = 1
-board[5, 4] = 1
-eboard = np.zeros(size)
-eboard[5, 5] = 1
-eboard[6, 5] = 1
-eboard[4, 5] = 1
-
+board = set([(10, 10), (11, 10), (9, 10)])
+eboard = set([(10, 10), (10, 11), (10, 9)])
 boards.append((board, eboard))
 
 @pytest.mark.parametrize('start, end', boards)
 def test_update(start, end):
-    run.update(start)
-    assert (start == end).all()
+    start = run.update(start)
+    assert start == end
