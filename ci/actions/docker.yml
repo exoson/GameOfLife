@@ -1,14 +1,6 @@
 name: 'Docker CI'
 description: 'Run CI in docker'
 
-inputs:
-  cmd:
-    description: 'Command to run'
-    required: true
-    default: 'echo hi'
-
 runs:
   using: 'docker'
   image: 'Dockerfile'
-  args:
-    - ${{ inputs.cmd }}

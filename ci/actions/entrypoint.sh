@@ -1,4 +1,5 @@
-#!/usr/bin
+#!/bin/bash
 
-$1
+echo SAATANAAAA
+
 python -m pytest
