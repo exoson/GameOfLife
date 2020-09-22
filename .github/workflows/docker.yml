@@ -1,0 +1,7 @@
+# action.yml
+name: 'Docker CI'
+description: 'Run CI in docker'
+
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
