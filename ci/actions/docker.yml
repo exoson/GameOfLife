@@ -4,3 +4,4 @@ description: 'Run CI in docker'
 runs:
   using: 'docker'
   image: 'Dockerfile'
+  entrypoint: '/code/ci/actions/entrypoint.sh'
