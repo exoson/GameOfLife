@@ -1,4 +1,3 @@
-import pygame
 import sys
 import numpy as np
 from copy import deepcopy
@@ -50,6 +49,8 @@ def set_to_arr(board):
     return arr
 
 def main():
+    import pygame
+
     pygame.init()
 
     bg_color = (0, 0, 0)
@@ -59,14 +60,14 @@ def main():
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT: sys.exit()
-        
+
         board = update(board)
 
         mouse_pos = np.array(pygame.mouse.get_pos(), dtype=np.int32)
         if pygame.mouse.get_pressed()[0]:
             scaled_pos = mouse_pos // scale
             board.add((scaled_pos[0], scaled_pos[1]))
-        
+
         board_arr = set_to_arr(board)
 
         screen.fill(bg_color)
